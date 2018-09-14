@@ -14,6 +14,11 @@ import { ContactoComponent } from './contacto/contacto.component';
 import { NosotrosComponent } from './nosotros/nosotros.component';
 import { InicioComponent } from './inicio/inicio.component';
 
+//esta clase  importa y ubica el archivos de servicios se crea manual
+import { EquipoService } from "./services/equipo.service";
+import { EquipoComponent } from './equipo/equipo.component';
+
+
 //define una variable o constante de tipo rutas path es el nombre de la ruta 
 //y component es el nombre del componente
 //RouterModule.forRoot(rutas) se agrega en la linea 36 para configurar las rutas
@@ -25,24 +30,32 @@ const rutas:Routes=[
   {path:"nosotros", component: NosotrosComponent},
   {path:"contacto", component: ContactoComponent},
   {path:"inicio", component: InicioComponent},
+  //la siguiente ruta especifica que va a permitir enviar un id en la url
+  {path:"equipo/:id", component: EquipoComponent},
   {path:"**", redirectTo: "/", pathMatch: "full"}
 ];
 
 @NgModule({
+  //contiene todos los componentes creados
   declarations: [
     AppComponent,
     CabeceraComponent,
     PiePaginaComponent,
     ContactoComponent,
     NosotrosComponent,
-    InicioComponent
+    InicioComponent,
+    EquipoComponent
   ],
   imports: [
     BrowserModule,
     NgbModule,
     RouterModule.forRoot(rutas)
   ],
-  providers: [],
+  //va los servicios
+  providers: [
+    EquipoService
+  ],
+  //donde inicia el arbol de la aplicacion
   bootstrap: [AppComponent]
 })
 export class AppModule { }
